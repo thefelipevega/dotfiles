@@ -1,0 +1,170 @@
+#//---DIRECTORY---//
+alias home="cd ~"
+alias edal="code ~/.aliases"
+alias web="cd ~/Sites/"
+alias desktop="cd ~/Desktop/"
+alias finder="open -a Finder"
+alias "?"="which"
+alias l="ls -AFGhlo | tail -n +2"
+
+#//---Dev---//
+alias maintain="brew upgrade && brew cleanup && composer global update"
+alias updep="composer update && npm update"
+function transition(){
+   gco $1 && composer install && npm install;
+}
+alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+
+#//---OhMyZsh---//
+alias zconf="code ~/.zshrc"
+
+#//---NPM---//
+alias nrd="npm run dev"
+alias nrw="npm run watch"
+
+#//---Herd--//
+alias hstart="herd start"
+alias hstop="herd stop"
+alias hre="herd restart"
+alias hsec="herd secure"
+
+#//---Laravel--//
+alias artisan="php artisan"
+alias tinker="artisan tinker"
+
+#Tools
+function jigsaw() {
+   if [ -f "./vendor/bin/jigsaw" ]
+   then
+      ./vendor/bin/jigsaw $@
+   else
+      composer require tightenco/jigsaw
+   fi
+}
+
+#Commands
+alias am="artisan migrate"
+alias amf="artisan migrate:fresh"
+alias amfs="artisan migrate:fresh --seed"
+alias amkm="artisan make:model"
+alias amka="artisan make:model -a"
+alias amkc="artisan make:controller"
+alias amkf="artisan make:factory"
+alias at="artisan test"
+alias atd="artisan test --dirty"
+alias atp="artisan test --parallel"
+alias atdp="artisan test --dirty --parallel"
+alias amkt="artisan make:test"
+alias amku="artisan make:test --unit"
+alias amkmi="artisan make:migration"
+
+#//---Git---//
+#Init
+alias ginit="git init && gaa && gcm 'init'";
+
+#Config
+alias gcg="git config --global"
+alias gcgl="git --no-pager config --global -l"
+alias gcge="gcg -e"
+
+#Adding
+alias ga="git add"
+alias gaa="git add ."
+
+#Status
+alias gs="git status --short --branch"
+
+#Log
+alias gl="git log --stat"
+alias glo="git log --oneline --decorate"
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+alias glfm="git log origin/main..@"
+alias glfd="git log origin/develop..@"
+function glgr(){
+   gl --grep=$1
+}
+function glogr(){
+   glo --grep=$1
+}
+
+#Diff
+alias gd="git diff"
+alias gds="git diff --staged"
+function gdf(){
+    git diff $1..@;
+}
+alias gdfm="git diff origin/main..@"
+alias gdfd="git diff origin/develop..@"
+alias gdt="git diff-tree --no-commit-id --name-only -r"
+alias gdth="gdt @"
+alias gdto="gdt --diff-filter=d @{u}..@"
+
+#Show
+alias gsh="git show"
+
+#Commit
+alias gc="git commit"
+alias gcm="git commit -m"
+alias "gc!"="git commit --verbose --amend"
+function gwip(){
+    gaa;
+    gcm "wip";
+}
+
+#Merge
+alias gm="git merge"
+alias gms="git merge --squash"
+
+#Push
+alias gp="git push -u"
+alias gpf="git push -f"
+alias gus="git branch --unset-upstream"
+
+#Pull
+alias gpl="git pull -p --rebase"
+alias gplm="gpl origin main";
+alias gpld="gpl origin develop";
+
+#Fetch
+alias gf="git fetch -p"
+
+#Branch/Checkout
+alias gb="git branch"
+alias gco="git checkout"
+alias gcom="git checkout main"
+alias gcod="git checkout develop"
+alias gcob="git checkout -b"
+alias gbm="git branch -m"
+
+#Rebase
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbs='git rebase --skip'
+function grbf(){
+   git rebase -i origin/$1
+}
+alias grbfm="grbf main"
+alias grbfd="grbf develop"
+function grbfh(){
+   git rebase -i HEAD~$1
+}
+function grbfo(){
+   git rebase -i @{u}
+}
+
+#Cherry-pick
+alias gcp="git cherry-pick"
+alias gcpa="git cherry-pick --abort"
+alias gcpc="git cherry-pick --continue"
+
+#Delete / Reset
+alias nah="git reset --hard; git clean -df;"
+alias grh="git reset --hard"
+alias grho="git reset --hard @{u}"
+alias grs="git reset --soft"
+alias grso="git reset --soft @{u}"
+alias gbd="gb -D"
+alias gbdo="gp -d origin"
+
+#Remote
+alias grpo="git remote prune origin"
