@@ -1,0 +1,16 @@
+[user]
+    name = Felipe Vega
+    email = felipevega@hey.com
+[core]
+    editor = code --wait
+[push]
+    default = current
+[pager]
+    branch = false
+    tag = false
+[log]
+    date = format-local: %a | %Y-%m-%d | %I:%M:%S %p
+[credential "https://github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
